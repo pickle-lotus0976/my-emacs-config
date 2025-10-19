@@ -50,52 +50,35 @@
 (setq read-process-output-max (* 1024 1024)) ; 1 MB
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Dashboard for Emacs
+;;; Dashboard - Welcome Screen
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package dashboard
-  :after all-the-icons  ; Wait for all-the-icons to load first
   :config
   ;; Dashboard settings
-  (setq dashboard-banner-logo-title "Welcome to Emacs!")
-  (setq dashboard-startup-banner 'logo)  ; Use Emacs logo
+  (setq dashboard-banner-logo-title "Welcome to Emacs")
+  (setq dashboard-startup-banner 'logo)  ; Emacs logo
 
   ;; Center content
   (setq dashboard-center-content t)
   (setq dashboard-vertically-center-content t)
 
-  ;; Show icons
+  ;; Show icons (simple, no fancy fonts needed)
   (setq dashboard-display-icons-p t)
   (setq dashboard-icon-type 'all-the-icons)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
 
-  ;; What to show on dashboard
-  (setq dashboard-items '((recents  . 5)
-                         (projects . 5)
-                         (bookmarks . 5)))
+  ;; What to show (keep it simple for speed)
+  (setq dashboard-items '((recents  . 3)
+                         (bookmarks . 5)
+                         (agenda . 5)))
 
-  ;; Show info about loading time
-  (setq dashboard-set-init-info nil)
+  ;; Show loading time
+  (setq dashboard-set-init-info t)
 
-  ;; Footer message
-  (setq dashboard-footer-messages
-        '("Its morbin' time"
-          "Its not a bug. Its an undocumented feature"
-          "Talk is cheap. Show me the code"
-          "I showed you my source code. Now pls respond"))
-
-  ;; Simple footer without icons
-  (setq dashboard-footer-icon nil)
-
-  ;; Simple navigation without complex icons
-  (setq dashboard-navigator-buttons
-        `((("GitHub" nil "Browse GitHub"
-            (lambda (&rest _) (browse-url "https://github.com")))
-           ("Projects" nil "Open Project"
-            (lambda (&rest _) (projectile-switch-project)))
-           ("Settings" nil "Open Config"
-            (lambda (&rest _) (find-file user-init-file))))))
+  ;; A simple but cool dashboard icon
+  (setq dashboard-footer-icon "⚡")
 
   ;; Activate dashboard
   (dashboard-setup-startup-hook))
